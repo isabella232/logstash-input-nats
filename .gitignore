@@ -2,4 +2,6 @@
 Gemfile.lock
 Gemfile.bak
 .bundle
-vendor
+.idea
+.ruby-version
+*~
