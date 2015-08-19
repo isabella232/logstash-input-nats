@@ -12,7 +12,7 @@ class LogStash::Inputs::Example < LogStash::Inputs::Base
   config_name "example"
 
   # If undefined, Logstash will complain, even if codec is unused.
-  default :codec, "plain" 
+  default :codec, "plain"
 
   # The message string to use in the event.
   config :message, :validate => :string, :default => "Hello World!"
