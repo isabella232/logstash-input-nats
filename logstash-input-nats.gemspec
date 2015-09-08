@@ -9,8 +9,6 @@ Gem::Specification.new do |s|
   s.homepage = "http://www.kreattiewe.com"
   s.require_paths = ["lib"]
 
-  s.platform = 'java'
-
   # Files
   s.files = `git ls-files`.split($\)
    # Tests
@@ -25,6 +23,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'logstash-devutils'
 
   # Jar dependencies
-  # s.requirements << "jar 'com.github.tyagihas:java_nats', '0.5.1'"
-  # s.add_runtime_dependency 'jar-dependencies'
+  s.requirements << "jar 'com.github.tyagihas:java_nats', '0.5.1'"
+  s.add_runtime_dependency 'jar-dependencies'
 end
