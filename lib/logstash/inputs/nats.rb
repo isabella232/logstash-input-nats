@@ -3,7 +3,6 @@ require "logstash/inputs/base"
 require "logstash/namespace"
 require 'load_jars'
 require "json"
-require_relative "parse_floats.rb"
 java_import "org.nats.Connection"
 java_import "org.nats.MsgHandler"
 java_import "java.util.Properties"
@@ -64,16 +63,7 @@ class NatsMessageHandler < org.nats.MsgHandler
   attr_accessor :queue
 
   def execute(msg, reply, subject)
-    puts msg
-    data = JSON.parse(msg)
-    #data['job_and_index'] = data['job'] + "/" + data["index"].to_s
-
-    data.convert_number_string_to_float
-    #load = { 'avg01' => data['vitals']['load'][0], 'avg05' => data['vitals']['load'][1], 'avg15' => data['vitals']['load'][2] }
-    #data['vitals']['load'] = load
-
-    #puts "NATS MSG received: msg:'#{msg}', reply: '#{reply}', subject: '#{subject}'"
-    event = LogStash::Event.new("subject" => subject, "reply" => reply, "@message" => data.to_json, "@type" => "NATS")
+    event = LogStash::Event.new("subject" => subject, "reply" => reply, "@message" => msg, "@type" => "NATS")
     @logstash.do_decorate(event)
     @queue << event
   end
